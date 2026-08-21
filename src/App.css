@@ -1,0 +1,477 @@
+/* =========================
+   GENERAL
+========================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f7ff;
+  color: #1f2937;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+  width: 100%;
+
+  background: linear-gradient(
+    135deg,
+    #4c1d95,
+    #7c3aed
+  );
+
+  color: white;
+
+  text-align: center;
+
+  padding: 35px 20px;
+}
+
+header h1 {
+  font-size: 32px;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+nav {
+  width: 100%;
+
+  background: #ffffff;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 35px;
+
+  padding: 18px 20px;
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 1000;
+
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+}
+
+nav a {
+  color: #374151;
+
+  text-decoration: none;
+
+  font-weight: bold;
+
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #7c3aed;
+}
+
+
+/* =========================
+   ALL SECTIONS
+========================= */
+
+section {
+  width: 100%;
+
+  margin: 0;
+
+  padding: 80px 20px;
+}
+
+section h2 {
+  font-size: 34px;
+
+  color: #4c1d95;
+
+  margin-bottom: 25px;
+
+  text-align: center;
+}
+
+
+/* =========================
+   HERO SECTION
+========================= */
+
+#home {
+  width: 100%;
+
+  min-height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  padding: 100px 20px;
+
+  background: linear-gradient(
+    135deg,
+    #ede9fe,
+    #e0f2fe,
+    #fce7f3
+  );
+
+  color: #1f2937;
+}
+
+
+/* Hero Heading */
+
+#home h2 {
+  font-size: 52px;
+
+  color: #312e81;
+
+  margin-bottom: 15px;
+}
+
+
+/* Hero Subtitle */
+
+#home h3 {
+  font-size: 25px;
+
+  color: #7c3aed;
+
+  margin-bottom: 20px;
+}
+
+
+/* Hero Paragraph */
+
+#home p {
+  max-width: 650px;
+
+  color: #475569;
+
+  font-size: 17px;
+
+  line-height: 1.8;
+}
+
+
+/* =========================
+   HERO BUTTON
+========================= */
+
+#home a {
+  display: inline-block;
+
+  margin-top: 30px;
+
+  padding: 14px 30px;
+
+  background: linear-gradient(
+    135deg,
+    #6d5dfc,
+    #8b5cf6
+  );
+
+  color: white;
+
+  text-decoration: none;
+
+  font-weight: bold;
+
+  border-radius: 30px;
+
+  box-shadow: 0 8px 20px rgba(109, 93, 252, 0.3);
+
+  transition: 0.3s;
+}
+
+#home a:hover {
+  transform: translateY(-4px);
+
+  box-shadow: 0 12px 25px rgba(109, 93, 252, 0.4);
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+#about {
+  width: 100%;
+
+  background: #ffffff;
+
+  text-align: center;
+
+  padding: 90px 20px;
+}
+
+#about h2 {
+  color: #4c1d95;
+}
+
+#about p {
+  max-width: 750px;
+
+  margin: auto;
+
+  color: #475569;
+
+  font-size: 17px;
+
+  line-height: 1.9;
+}
+
+
+/* =========================
+   EDUCATION
+========================= */
+
+#education {
+  width: 100%;
+
+  background: #f8f7ff;
+
+  padding: 90px 20px;
+}
+
+#education div {
+  background: white;
+
+  padding: 30px;
+
+  margin: 20px auto;
+
+  max-width: 750px;
+
+  border-radius: 15px;
+
+  border-left: 5px solid #7c3aed;
+
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+
+  transition: 0.3s;
+}
+
+#education div:hover {
+  transform: translateY(-5px);
+
+  box-shadow: 0 12px 30px rgba(124, 58, 237, 0.15);
+}
+
+#education h3 {
+  color: #5b21b6;
+
+  margin-bottom: 8px;
+}
+
+#education p {
+  color: #64748b;
+}
+
+
+/* =========================
+   SKILLS
+========================= */
+
+#skills {
+  width: 100%;
+
+  background: #ffffff;
+
+  padding: 90px 20px;
+}
+
+#skills ul {
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 18px;
+
+  list-style: none;
+}
+
+#skills li {
+  background: linear-gradient(
+    135deg,
+    #ede9fe,
+    #e0f2fe
+  );
+
+  color: #4338ca;
+
+  padding: 14px 25px;
+
+  border-radius: 25px;
+
+  font-weight: bold;
+
+  border: 1px solid #ddd6fe;
+
+  transition: 0.3s;
+}
+
+#skills li:hover {
+  transform: translateY(-5px);
+
+  background: #7c3aed;
+
+  color: white;
+
+  border-color: #7c3aed;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+#contact {
+  width: 100%;
+
+  background: linear-gradient(
+    135deg,
+    #ede9fe,
+    #fce7f3
+  );
+
+  text-align: center;
+
+  padding: 90px 20px;
+}
+
+#contact h2 {
+  color: #4c1d95;
+}
+
+#contact p {
+  margin: 12px 0;
+
+  color: #475569;
+
+  font-size: 17px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  width: 100%;
+
+  background: #312e81;
+
+  color: white;
+
+  text-align: center;
+
+  padding: 30px 20px;
+}
+
+footer p {
+  margin: 0;
+}
+
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+
+  header h1 {
+    font-size: 26px;
+  }
+
+  nav {
+    flex-direction: column;
+
+    gap: 15px;
+
+    padding: 15px;
+  }
+
+  section {
+    width: 100%;
+
+    padding: 60px 20px;
+  }
+
+  #home {
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding: 80px 20px;
+  }
+
+  #home h2 {
+    font-size: 38px;
+  }
+
+  #home h3 {
+    font-size: 20px;
+  }
+
+  #home p {
+    font-size: 16px;
+  }
+
+  section h2 {
+    font-size: 28px;
+  }
+
+  #education div {
+    padding: 22px;
+  }
+
+  #skills ul {
+    gap: 12px;
+  }
+
+  #skills li {
+    padding: 12px 18px;
+  }
+}
+
+.profile-image {
+  width: 180px;
+  height: 180px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  border: 5px solid #7c3aed;
+
+  margin-bottom: 25px;
+
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.25);
+}
