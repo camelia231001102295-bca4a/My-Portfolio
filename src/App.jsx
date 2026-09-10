@@ -1,5 +1,48 @@
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import profileImage from './images/profile.jpeg'
+
+
+// ==============================
+// SCROLL REVEAL COMPONENT
+// ==============================
+
+function Reveal({ children, className = '', delay = 0 }) {
+  const ref = useRef(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const element = ref.current
+
+    if (!element) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          observer.unobserve(element)
+        }
+      },
+      {
+        threshold: 0.15
+      }
+    )
+
+    observer.observe(element)
+
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div
+      ref={ref}
+      className={`reveal ${visible ? 'reveal-visible' : ''} ${className}`}
+      style={{ '--delay': `${delay}s` }}
+    >
+      {children}
+    </div>
+  )
+}
 
 
 // ==============================
@@ -29,6 +72,29 @@ function Header() {
 
 
 // ==============================
+// SECTION NAVIGATION BUTTON
+// ==============================
+
+function NextButton({ href, text, direction = 'down' }) {
+  return (
+    <div className="next-button-container">
+
+      <a href={href} className="next-button">
+
+        <span>{text}</span>
+
+        <b>
+          {direction === 'up' ? '↑' : '↓'}
+        </b>
+
+      </a>
+
+    </div>
+  )
+}
+
+
+// ==============================
 // HERO
 // ==============================
 
@@ -38,10 +104,15 @@ function Hero() {
 
       <div className="hero-glow glow-one"></div>
       <div className="hero-glow glow-two"></div>
+      <div className="hero-glow glow-three"></div>
 
       <div className="floating-star star-one">✦</div>
       <div className="floating-star star-two">✧</div>
       <div className="floating-star star-three">✦</div>
+      <div className="floating-star star-four">✧</div>
+
+
+      {/* HERO CONTENT */}
 
       <div className="hero-content">
 
@@ -63,6 +134,9 @@ function Hero() {
           through code.
         </p>
 
+
+        {/* MAIN BUTTONS */}
+
         <div className="hero-buttons">
 
           <a href="#about" className="primary-button">
@@ -81,11 +155,25 @@ function Hero() {
 
         </div>
 
+
+        {/* CONTINUE BUTTON */}
+
+        <NextButton
+          href="#about"
+          text="Continue to About"
+        />
+
       </div>
 
+
+      {/* SCROLL INDICATOR */}
+
       <div className="scroll-indicator">
-        <span></span>
+
+        <span>↓</span>
+
         Scroll to explore
+
       </div>
 
     </section>
@@ -101,23 +189,25 @@ function About() {
   return (
     <section id="about" className="about-section">
 
-      <div className="about-image">
+      <Reveal className="about-image">
 
         <div className="image-ring">
 
           <div className="image-circle">
+
             <img
               src={profileImage}
               alt="Camelia"
             />
+
           </div>
 
         </div>
 
-      </div>
+      </Reveal>
 
 
-      <div className="about-text">
+      <Reveal className="about-text" delay={0.15}>
 
         <p className="small-title">
           ABOUT ME
@@ -143,10 +233,23 @@ function About() {
 
         <div className="about-highlight">
           <span>01</span>
-          <p>Always learning. Always building.</p>
+
+          <p>
+            Always learning. Always building.
+          </p>
         </div>
 
-      </div>
+      </Reveal>
+
+
+      <Reveal className="about-next" delay={0.25}>
+
+        <NextButton
+          href="#education"
+          text="Continue to Education"
+        />
+
+      </Reveal>
 
     </section>
   )
@@ -161,7 +264,7 @@ function Education() {
   return (
     <section id="education" className="section">
 
-      <div className="section-heading">
+      <Reveal className="section-heading">
 
         <p className="small-title">
           MY JOURNEY
@@ -171,42 +274,56 @@ function Education() {
           Education
         </h2>
 
-      </div>
+      </Reveal>
 
 
-      <div className="education-card">
+      <Reveal delay={0.15}>
 
-        <div className="education-icon">
-          🎓
+        <div className="education-card">
+
+          <div className="education-icon">
+            🎓
+          </div>
+
+          <div className="education-content">
+
+            <p className="year">
+              CURRENTLY PURSUING
+            </p>
+
+            <h3>
+              Bachelor of Computer Applications
+            </h3>
+
+            <p className="college">
+              Techno India University, West Bengal
+            </p>
+
+            <p className="description">
+              Building a strong foundation in computer science,
+              programming, software development and modern
+              web technologies.
+            </p>
+
+          </div>
+
+          <div className="education-arrow">
+            →
+          </div>
+
         </div>
 
-        <div className="education-content">
+      </Reveal>
 
-          <p className="year">
-            CURRENTLY PURSUING
-          </p>
 
-          <h3>
-            Bachelor of Computer Applications
-          </h3>
+      <Reveal delay={0.3}>
 
-          <p className="college">
-            Techno India University, West Bengal
-          </p>
+        <NextButton
+          href="#skills"
+          text="Continue to Skills"
+        />
 
-          <p className="description">
-            Building a strong foundation in computer science,
-            programming, software development and modern
-            web technologies.
-          </p>
-
-        </div>
-
-        <div className="education-arrow">
-          →
-        </div>
-
-      </div>
+      </Reveal>
 
     </section>
   )
@@ -218,10 +335,22 @@ function Education() {
 // ==============================
 
 function Skills() {
+
+  const skills = [
+    ['01', 'HTML', 'Web Structure'],
+    ['02', 'CSS', 'Web Design'],
+    ['03', 'JavaScript', 'Programming'],
+    ['04', 'React', 'Frontend Development'],
+    ['05', 'Python', 'Programming'],
+    ['06', 'C', 'Programming'],
+    ['07', 'C++', 'Programming'],
+    ['08', 'Java', 'Programming']
+  ]
+
   return (
     <section id="skills" className="section skills-section">
 
-      <div className="section-heading">
+      <Reveal className="section-heading">
 
         <p className="small-title">
           WHAT I WORK WITH
@@ -231,48 +360,51 @@ function Skills() {
           My Skills
         </h2>
 
-      </div>
+      </Reveal>
 
 
       <div className="skills">
 
-        <div className="skill-card">
-          <div className="skill-number">01</div>
-          <h3>HTML</h3>
-          <p>Web Structure</p>
-        </div>
+        {skills.map((skill, index) => (
 
-        <div className="skill-card">
-          <div className="skill-number">02</div>
-          <h3>CSS</h3>
-          <p>Web Design</p>
-        </div>
+          <Reveal
+            key={skill[1]}
+            delay={index * 0.08}
+          >
 
-        <div className="skill-card">
-          <div className="skill-number">03</div>
-          <h3>JavaScript</h3>
-          <p>Programming</p>
-        </div>
+            <div className="skill-card">
 
-        <div className="skill-card">
-          <div className="skill-number">04</div>
-          <h3>React</h3>
-          <p>Frontend Development</p>
-        </div>
+              <div className="skill-number">
+                {skill[0]}
+              </div>
 
-        <div className="skill-card">
-          <div className="skill-number">05</div>
-          <h3>Python</h3>
-          <p>Programming</p>
-        </div>
+              <h3>
+                {skill[1]}
+              </h3>
 
-        <div className="skill-card">
-          <div className="skill-number">06</div>
-          <h3>C</h3>
-          <p>Programming</p>
-        </div>
+              <p>
+                {skill[2]}
+              </p>
+
+              <div className="skill-glow"></div>
+
+            </div>
+
+          </Reveal>
+
+        ))}
 
       </div>
+
+
+      <Reveal delay={0.3}>
+
+        <NextButton
+          href="#cv"
+          text="Continue to CV"
+        />
+
+      </Reveal>
 
     </section>
   )
@@ -285,39 +417,59 @@ function Skills() {
 
 function CV() {
   return (
-    <section className="cv-section">
+    <section id="cv" className="cv-section">
 
-      <div className="cv-box">
+      <Reveal>
 
-        <div>
+        <div className="cv-box">
 
-          <p className="small-title">
-            MY RESUME
-          </p>
+          <div>
 
-          <h2>
-            Want to know more
-            <br />
-            about <span>me?</span>
-          </h2>
+            <p className="small-title">
+              MY RESUME
+            </p>
 
-          <p>
-            Take a look at my CV to learn more about my
-            education, skills, projects and experience.
-          </p>
+            <h2>
+              Want to know more
+              <br />
+              about <span>me?</span>
+            </h2>
+
+            <p>
+              Take a look at my CV to learn more about my
+              education, skills, projects and experience.
+            </p>
+
+          </div>
+
+          <a
+            href="/Camelia_Pramanick_CV.pdf"
+            download="Camelia_Pramanick_CV.pdf"
+            className="cv-button"
+          >
+            <span>
+              Download CV
+            </span>
+
+            <b>
+              ↓
+            </b>
+
+          </a>
 
         </div>
 
-        <a
-          href="/Camelia_Pramanick_CV.pdf"
-          download="Camelia_Pramanick_CV.pdf"
-          className="cv-button"
-        >
-          <span>Download CV</span>
-          <b>↓</b>
-        </a>
+      </Reveal>
 
-      </div>
+
+      <Reveal delay={0.2}>
+
+        <NextButton
+          href="#contact"
+          text="Continue to Contact"
+        />
+
+      </Reveal>
 
     </section>
   )
@@ -332,55 +484,87 @@ function Contact() {
   return (
     <section id="contact" className="contact-section">
 
-      <p className="small-title">
-        GET IN TOUCH
-      </p>
+      <Reveal>
 
-      <h2>
-        Let's connect<span>.</span>
-      </h2>
+        <p className="small-title">
+          GET IN TOUCH
+        </p>
 
-      <p className="contact-text">
-        Have an idea, opportunity or simply want to say hello?
-        Feel free to reach out.
-      </p>
+        <h2>
+          Let's connect<span>.</span>
+        </h2>
+
+        <p className="contact-text">
+          Have an idea, opportunity or simply want to say hello?
+          Feel free to reach out.
+        </p>
+
+      </Reveal>
+
 
       <div className="contact-card">
 
-        <div className="contact-item">
+        <Reveal delay={0.1}>
 
-          <span>✉</span>
+          <div className="contact-item">
 
-          <div>
+            <span>
+              ✉
+            </span>
 
-            <small>Email</small>
+            <div>
 
-            <a href="mailto:your-email@example.com">
-              cameliapramanick12345@gmail.com
-            </a>
+              <small>
+                Email
+              </small>
 
-          </div>
+              <a href="mailto:cameliapramanick12345@gmail.com">
+                cameliapramanick12345@gmail.com
+              </a>
 
-        </div>
-
-
-        <div className="contact-item">
-
-          <span>☎</span>
-
-          <div>
-
-            <small>Phone</small>
-
-            <a href="tel:+910000000000">
-              +91 62901 55555
-            </a>
+            </div>
 
           </div>
 
-        </div>
+        </Reveal>
+
+
+        <Reveal delay={0.2}>
+
+          <div className="contact-item">
+
+            <span>
+              ☎
+            </span>
+
+            <div>
+
+              <small>
+                Phone
+              </small>
+
+              <a href="tel:+916290155555">
+                +91 62901 55555
+              </a>
+
+            </div>
+
+          </div>
+
+        </Reveal>
 
       </div>
+
+
+      <Reveal delay={0.3}>
+
+        <NextButton
+          href="#home"
+          text="Back to Top"
+          direction="up"
+        />
+
+      </Reveal>
 
     </section>
   )
