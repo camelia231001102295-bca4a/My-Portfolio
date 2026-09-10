@@ -71,8 +71,8 @@ function Hero() {
           </a>
 
           <a
-            href="/cv.pdf"
-            download="Camelia-Pramanick-CV.pdf"
+            href="/Camelia_Pramanick_CV.pdf"
+            download="Camelia_Pramanick_CV.pdf"
             className="secondary-button"
           >
             Download CV
@@ -290,6 +290,7 @@ function CV() {
       <div className="cv-box">
 
         <div>
+
           <p className="small-title">
             MY RESUME
           </p>
@@ -304,11 +305,12 @@ function CV() {
             Take a look at my CV to learn more about my
             education, skills, projects and experience.
           </p>
+
         </div>
 
         <a
-          href="/cv.pdf"
-          download="Camelia-Pramanick-CV.pdf"
+          href="/Camelia_Pramanick_CV.pdf"
+          download="Camelia_Pramanick_CV.pdf"
           className="cv-button"
         >
           <span>Download CV</span>
@@ -346,19 +348,36 @@ function Contact() {
       <div className="contact-card">
 
         <div className="contact-item">
+
           <span>✉</span>
+
           <div>
+
             <small>Email</small>
-            <p>your-email@example.com</p>
+
+            <a href="mailto:your-email@example.com">
+              cameliapramanick12345@gmail.com
+            </a>
+
           </div>
+
         </div>
 
+
         <div className="contact-item">
+
           <span>☎</span>
+
           <div>
+
             <small>Phone</small>
-            <p>+91 XXXXX XXXXX</p>
+
+            <a href="tel:+910000000000">
+              +91 62901 55555
+            </a>
+
           </div>
+
         </div>
 
       </div>
